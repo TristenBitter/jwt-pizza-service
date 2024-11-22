@@ -1,9 +1,9 @@
 const express = require('express');
-const { authRouter, setAuthUser } = require('./routes/authRouter.js');
-const orderRouter = require('./routes/orderRouter.js');
-const franchiseRouter = require('./routes/franchiseRouter.js');
-const version = require('./version.json');
-const config = require('./config.js');
+const { authRouter, setAuthUser } = require('./authRouter.js');
+const orderRouter = require('./orderRouter.js');
+const franchiseRouter = require('./franchiseRouter.js');
+const version = require('../version.json');
+const config = require('../config.js');
 
 const app = express();
 app.use(express.json());

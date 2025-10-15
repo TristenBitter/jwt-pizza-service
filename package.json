@@ -4,13 +4,35 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "cd src && node index.js"
+    "start": "cd src && node index.js",
+    "lint": "eslint .",
+    "test": "jest"
   },
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TristenBitter/jwt-pizza-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/TristenBitter/jwt-pizza-service/issues"
+  },
+  "homepage": "https://github.com/TristenBitter/jwt-pizza-service#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "eslint": "^9.37.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4",
+    "typescript-eslint": "^8.46.1"
   }
 }

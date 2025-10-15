@@ -5,5 +5,6 @@ export default {
   coverageDirectory: "coverage",
   coverageReporters: ["json-summary", "lcov", "text", "clover"],
   coverageThreshold: { global: { lines: 80 } },
+  
 };
 

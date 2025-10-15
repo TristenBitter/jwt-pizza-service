@@ -1,10 +1,10 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const config = require('../config.js');
-const { asyncHandler } = require('../endpointHelper.js');
-const { DB, Role } = require('../database/database.js');
+import { Router } from 'express';
+import { verify, sign } from 'jsonwebtoken';
+import { jwtSecret } from '../config.js';
+import { asyncHandler } from '../endpointHelper.js';
+import { DB, Role } from '../database/database.js';
 
-const authRouter = express.Router();
+const authRouter = Router();
 
 authRouter.docs = [
   {
@@ -37,7 +37,7 @@ async function setAuthUser(req, res, next) {
     try {
       if (await DB.isLoggedIn(token)) {
         // Check the database to make sure the token is valid.
-        req.user = jwt.verify(token, config.jwtSecret);
+        req.user = verify(token, jwtSecret);
         req.user.isRole = (role) => !!req.user.roles.find((r) => r.role === role);
       }
     } catch {
@@ -91,7 +91,7 @@ authRouter.delete(
 );
 
 async function setAuth(user) {
-  const token = jwt.sign(user, config.jwtSecret);
+  const token = sign(user, jwtSecret);
   await DB.loginUser(user.id, token);
   return token;
 }
@@ -111,4 +111,4 @@ function readAuthToken(req) {
   return null;
 }
 
-module.exports = { authRouter, setAuthUser, setAuth };
+export default { authRouter, setAuthUser, setAuth };

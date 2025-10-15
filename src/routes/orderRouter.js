@@ -1,10 +1,10 @@
-const express = require('express');
-const config = require('../config.js');
-const { Role, DB } = require('../database/database.js');
-const { authRouter } = require('./authRouter.js');
-const { asyncHandler, StatusCodeError } = require('../endpointHelper.js');
+import { Router } from 'express';
+import { factory } from '../config.js';
+import { Role, DB } from '../database/database.js';
+import { authRouter } from './authRouter.js';
+import { asyncHandler, StatusCodeError } from '../endpointHelper.js';
 
-const orderRouter = express.Router();
+const orderRouter = Router();
 
 orderRouter.docs = [
   {
@@ -79,9 +79,9 @@ orderRouter.post(
   asyncHandler(async (req, res) => {
     const orderReq = req.body;
     const order = await DB.addDinerOrder(req.user, orderReq);
-    const r = await fetch(`${config.factory.url}/api/order`, {
+    const r = await fetch(`${factory.url}/api/order`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', authorization: `Bearer ${config.factory.apiKey}` },
+      headers: { 'Content-Type': 'application/json', authorization: `Bearer ${factory.apiKey}` },
       body: JSON.stringify({ diner: { id: req.user.id, name: req.user.name, email: req.user.email }, order }),
     });
     const j = await r.json();
@@ -93,4 +93,4 @@ orderRouter.post(
   })
 );
 
-module.exports = orderRouter;
+export default orderRouter;

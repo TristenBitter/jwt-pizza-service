@@ -1,9 +1,9 @@
-const express = require('express');
-const { asyncHandler } = require('../endpointHelper.js');
-const { DB, Role } = require('../database/database.js');
-const { authRouter, setAuth } = require('./authRouter.js');
+import { Router } from 'express';
+import { asyncHandler } from '../endpointHelper.js';
+import { DB, Role } from '../database/database.js';
+import { authRouter, setAuth } from './authRouter.js';
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 userRouter.docs = [
   {
@@ -51,4 +51,4 @@ userRouter.put(
   })
 );
 
-module.exports = userRouter;
+export default userRouter;

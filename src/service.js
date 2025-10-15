@@ -1,13 +1,13 @@
-const express = require('express');
-const { authRouter, setAuthUser } = require('./routes/authRouter.js');
-const orderRouter = require('./routes/orderRouter.js');
-const franchiseRouter = require('./routes/franchiseRouter.js');
-const userRouter = require('./routes/userRouter.js');
-const version = require('./version.json');
-const config = require('./config.js');
+import express, { json, Router } from 'express';
+import { authRouter, setAuthUser} from './routes/authRouter.js';
+import orderRouter from './routes/orderRouter.js';
+import franchiseRouter from './routes/franchiseRouter.js';
+import userRouter from './routes/userRouter.js';
+import { version as _version } from './version.json';
+import { factory as _factory, db as _db } from './config.js';
 
 const app = express();
-app.use(express.json());
+app.use(json());
 app.use(setAuthUser);
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const apiRouter = express.Router();
+const apiRouter = Router();
 app.use('/api', apiRouter);
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/user', userRouter);
@@ -26,16 +26,16 @@ apiRouter.use('/franchise', franchiseRouter);
 
 apiRouter.use('/docs', (req, res) => {
   res.json({
-    version: version.version,
+    version: _version,
     endpoints: [...authRouter.docs, ...userRouter.docs, ...orderRouter.docs, ...franchiseRouter.docs],
-    config: { factory: config.factory.url, db: config.db.connection.host },
+    config: { factory: _factory.url, db: _db.connection.host },
   });
 });
 
 app.get('/', (req, res) => {
   res.json({
     message: 'welcome to JWT Pizza',
-    version: version.version,
+    version: _version,
   });
 });
 
@@ -51,4 +51,4 @@ app.use((err, req, res, next) => {
   next();
 });
 
-module.exports = app;
+export default app;

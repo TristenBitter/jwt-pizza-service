@@ -1,9 +1,9 @@
-const express = require('express');
-const { DB, Role } = require('../database/database.js');
-const { authRouter } = require('./authRouter.js');
-const { StatusCodeError, asyncHandler } = require('../endpointHelper.js');
+import { Router } from 'express';
+import { DB, Role } from '../database/database.js';
+import { authRouter }from './authRouter.js';
+import { StatusCodeError, asyncHandler } from '../endpointHelper.js';
 
-const franchiseRouter = express.Router();
+const franchiseRouter = Router();
 
 franchiseRouter.docs = [
   {
@@ -135,4 +135,4 @@ franchiseRouter.delete(
   })
 );
 
-module.exports = franchiseRouter;
+export default franchiseRouter;

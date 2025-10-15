@@ -62,4 +62,4 @@ const tableCreateStatements = [
   )`,
 ];
 
-module.exports = { tableCreateStatements };
+export default { tableCreateStatements };

@@ -1,4 +1,4 @@
-const { Role, DB } = require('./database/database.js');
+import { Role, DB } from './database/database.js';
 
 if (process.argv.length < 5) {
   console.log('Usage: node init.js <name> <email> <password>');

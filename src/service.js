@@ -3,10 +3,11 @@ import { authRouter, setAuthUser} from './routes/authRouter.js';
 import orderRouter from './routes/orderRouter.js';
 import franchiseRouter from './routes/franchiseRouter.js';
 import userRouter from './routes/userRouter.js';
-import { version as _version } from './version.json';
+import versionJson from './version.json' with { type: 'json' };
+const _version = versionJson.version;
 import { factory as _factory, db as _db } from './config.js';
 
-const app = express();
+export const app = express();
 app.use(json());
 app.use(setAuthUser);
 app.use((req, res, next) => {

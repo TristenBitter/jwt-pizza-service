@@ -3,7 +3,7 @@ import { asyncHandler } from '../endpointHelper.js';
 import { DB, Role } from '../database/database.js';
 import { authRouter, setAuth } from './authRouter.js';
 
-const userRouter = Router();
+export const userRouter = Router();
 
 userRouter.docs = [
   {

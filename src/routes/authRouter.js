@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import { verify, sign } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
+const { verify, sign } = jwt;
 import { jwtSecret } from '../config.js';
 import { asyncHandler } from '../endpointHelper.js';
-import { DB, Role } from '../database/database.js';
+import { DBInstance as DB, Role } from '../database/database.js';
 
-const authRouter = Router();
+export const authRouter = Router();
 
 authRouter.docs = [
   {
@@ -111,4 +112,6 @@ function readAuthToken(req) {
   return null;
 }
 
+export { setAuthUser, setAuth };
 export default { authRouter, setAuthUser, setAuth };
+

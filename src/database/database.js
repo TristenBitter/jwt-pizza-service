@@ -4,7 +4,8 @@ import { db as _db } from '../config.js';
 import { StatusCodeError } from '../endpointHelper.js';
 import { Role } from '../model/model.js';
 import { tableCreateStatements } from './dbModel.js';
-class DB {
+
+export class DB {
   constructor() {
     this.initialized = this.initializeDatabase();
   }
@@ -362,5 +363,8 @@ class DB {
   }
 }
 
-const db = new DB();
-export default { Role, DB: db };
+// export const db = new DB();
+// export { Role } from '../model/model.js';
+// export default { Role, DB: db };
+export const DBInstance = new DB();
+export { Role };

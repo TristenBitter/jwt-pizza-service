@@ -4,7 +4,7 @@ import { Role, DB } from '../database/database.js';
 import { authRouter } from './authRouter.js';
 import { asyncHandler, StatusCodeError } from '../endpointHelper.js';
 
-const orderRouter = Router();
+export const orderRouter = Router();
 
 orderRouter.docs = [
   {

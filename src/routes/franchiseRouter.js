@@ -3,7 +3,7 @@ import { DB, Role } from '../database/database.js';
 import { authRouter }from './authRouter.js';
 import { StatusCodeError, asyncHandler } from '../endpointHelper.js';
 
-const franchiseRouter = Router();
+export const franchiseRouter = Router();
 
 franchiseRouter.docs = [
   {

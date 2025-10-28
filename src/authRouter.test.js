@@ -3,7 +3,6 @@ import request from "supertest";
 import app from "./service.js";
 import { DBInstance as DB } from "./database/database.js";
 
-// Mock mysql2/promise BEFORE any imports that use it
 jest.unstable_mockModule("mysql2/promise", () => ({
   createConnection: jest.fn().mockResolvedValue({
     execute: jest.fn().mockResolvedValue([[]]),
@@ -12,14 +11,15 @@ jest.unstable_mockModule("mysql2/promise", () => ({
   }),
 }));
 
-// Import the mocked module
-const mysql = await import("mysql2/promise");
-const { createConnection } = mysql;
+let createConnection;
 
 const testUser = { name: "pizza diner", email: "reg@test.com", password: "a" };
 let testUserAuthToken;
 
 beforeAll(async () => {
+  const mysql = await import("mysql2/promise");
+  createConnection = mysql.createConnection;
+
   testUser.email = Math.random().toString(36).substring(2, 12) + "@test.com";
   const registerRes = await request(app).post("/api/auth").send(testUser);
   testUserAuthToken = registerRes.body.token;

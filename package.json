@@ -3,36 +3,34 @@
   "description": "Backend service for making JWT pizzas",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "cd src && node index.js",
     "lint": "eslint .",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "jest --coverage"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TristenBitter/jwt-pizza-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TristenBitter/jwt-pizza-service/issues"
+  },
+  "homepage": "https://github.com/TristenBitter/jwt-pizza-service#readme",
+  "keywords": [],
+  "author": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.15.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TristenBitter/jwt-pizza-service.git"
-  },
-  "keywords": [],
-  "author": "",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/TristenBitter/jwt-pizza-service/issues"
-  },
-  "homepage": "https://github.com/TristenBitter/jwt-pizza-service#readme",
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "eslint": "^9.37.0",
-    "eslint-plugin-react": "^7.37.5",
     "globals": "^16.4.0",
     "jest": "^30.2.0",
-    "supertest": "^7.1.4",
-    "typescript-eslint": "^8.46.1"
+    "supertest": "^7.1.4"
   }
 }

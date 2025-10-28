@@ -3,10 +3,11 @@
   "description": "Backend service for making JWT pizzas",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "cd src && node index.js",
     "lint": "eslint .",
-    "test": "jest --coverage"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "license": "MIT",
   "repository": {

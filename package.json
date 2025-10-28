@@ -18,6 +18,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TristenBitter/jwt-pizza-service.git"
+  }, 
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",

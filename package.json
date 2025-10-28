@@ -3,7 +3,6 @@
   "description": "Backend service for making JWT pizzas",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "cd src && node index.js",
     "lint": "eslint .",

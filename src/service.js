@@ -3,8 +3,15 @@ import { authRouter, setAuthUser} from './routes/authRouter.js';
 import orderRouter from './routes/orderRouter.js';
 import franchiseRouter from './routes/franchiseRouter.js';
 import userRouter from './routes/userRouter.js';
-import versionJson from './version.json' with { type: 'json' };
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const versionJson = JSON.parse(readFileSync(join(__dirname, 'version.json'), 'utf-8'));
 const _version = versionJson.version;
+
 import { factory as _factory, db as _db } from './config.js';
 
 export const app = express();

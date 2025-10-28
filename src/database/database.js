@@ -1,6 +1,6 @@
 import { createConnection } from "mysql2/promise";
 import { hash, compare } from "bcrypt";
-import { db as _db } from "../../src/config.js";
+import { db as _db } from "../config.js";
 import { StatusCodeError } from "../endpointHelper.js";
 import { Role } from "../model/model.js";
 import { tableCreateStatements } from "./dbModel.js";

@@ -33,23 +33,25 @@ jobs:
         run: npm run lint
       - name: Write config file
         run: |
-          echo "module.exports = {
-            jwtSecret: '${{ secrets.JWT_SECRET }}',
-            db: {
-              connection: {
-                host: '127.0.0.1',
-                user: 'root',
-                password: 'tempdbpassword',
-                database: 'pizza',
-                connectTimeout: 60000,
-              },
-              listPerPage: 10,
+          cat > src/config.js << 'EOF'
+          export const jwtSecret = '${{ secrets.JWT_SECRET }}';
+          
+          export const db = {
+            connection: {
+              host: '127.0.0.1',
+              user: 'root',
+              password: 'tempdbpassword',
+              database: 'pizza',
+              connectTimeout: 60000,
             },
-            factory: {
-              url: 'https://pizza-factory.cs329.click',
-              apiKey: '${{ secrets.FACTORY_API_KEY }}',
-            },
-          };" > src/config.js
+            listPerPage: 10,
+          };
+          
+          export const factory = {
+            url: 'https://pizza-factory.cs329.click',
+            apiKey: '${{ secrets.FACTORY_API_KEY }}',
+          };
+          EOF
       # - name: Tests
       #   run: npm test
       - name: set version
@@ -77,7 +79,6 @@ jobs:
         with:
           name: package
           path: dist/
-
   deploy:
     runs-on: ubuntu-latest
     permissions:

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 const { verify, sign } = jwt;
 import { jwtSecret } from "../config.js";
 import { asyncHandler } from "../endpointHelper.js";
-import { DBInstance as DB, Role } from "../database/database.js";
+import { DB, Role } from "../database/database.js";
 
 export const authRouter = Router();
 

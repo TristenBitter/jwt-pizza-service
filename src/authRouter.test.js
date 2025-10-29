@@ -1,7 +1,7 @@
 import { jest } from "@jest/globals";
 import request from "supertest";
 import app from "./service.js";
-import { DB, Role } from "../database/database.js";
+import { DB } from "../database/database.js";
 
 jest.unstable_mockModule("mysql2/promise", () => ({
   createConnection: jest.fn().mockResolvedValue({

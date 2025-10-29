@@ -600,5 +600,5 @@ export class DB {
 // export const db = new DB();
 // export { Role } from '../model/model.js';
 // export default { Role, DB: db };
-export const DBInstance = new DB();
-export { Role };
+const db = new DB();
+export { db as DB, Role };

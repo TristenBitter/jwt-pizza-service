@@ -5,7 +5,7 @@ import { StatusCodeError } from "../endpointHelper.js";
 import { Role } from "../model/model.js";
 import { tableCreateStatements } from "./dbModel.js";
 
-export class DB {
+class DB {
   constructor() {
     this.initialized = this.initializeDatabase();
   }

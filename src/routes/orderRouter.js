@@ -125,7 +125,7 @@ orderRouter.post(
     const r = await fetch(`${factory.url}/api/order`, {
       method: "POST",
       headers: {
-        "Content-Type": application / json,
+        "Content-Type": "application / json",
         authorization: `Bearer ${factory.apiKey}`,
       },
       body: JSON.stringify({

@@ -78,19 +78,17 @@ class Metrics {
     this.pizzaLatency.push(latency);
   }
 
-  // Get CPU usage percentage
-  getCpuUsagePercentage() {
+getCpuUsagePercentage() {
     const cpuUsage = os.loadavg()[0] / os.cpus().length;
-    return parseFloat((cpuUsage * 100).toFixed(2));
+    return Math.round(cpuUsage * 100);  // Return integer
   }
 
-  // Get memory usage percentage
   getMemoryUsagePercentage() {
     const totalMemory = os.totalmem();
     const freeMemory = os.freemem();
     const usedMemory = totalMemory - freeMemory;
     const memoryUsage = (usedMemory / totalMemory) * 100;
-    return parseFloat(memoryUsage.toFixed(2));
+    return Math.round(memoryUsage);  // Return integer
   }
 
   // Calculate average latency

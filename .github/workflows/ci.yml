@@ -33,34 +33,36 @@ jobs:
         run: npm run lint
       - name: Write config file
         run: |
-          cat > src/config.js << 'EOF'
-          export const jwtSecret = '${{ secrets.JWT_SECRET }}';
-          export const db = {
-            connection: {
-              host: '127.0.0.1',
-              user: 'root',
-              password: 'tempdbpassword',
-              database: 'pizza',
-              connectTimeout: 60000,
-            },
-            listPerPage: 10,
-          };
-          export const factory = {
-            url: 'https://pizza-factory.cs329.click',
-            apiKey: '${{ secrets.FACTORY_API_KEY }}',
-          };
-          export const metrics = {
-            source: 'jwt-pizza-service',
-            url: '${{ secrets.METRICS_URL }}',
-            apiKey: '${{ secrets.METRICS_API_KEY }}',
-          };
-          export const logging = {
-            source: 'jwt-pizza-service',
-            userId: ${{ secrets.LOGGING_USER_ID }},
-            url: '${{ secrets.LOGGING_URL }}',
-            apiKey: '${{ secrets.LOGGING_API_KEY }}',
-          };
-          EOF
+          echo "export const jwtSecret = '${{ secrets.JWT_SECRET }}';" > src/config.js
+          echo "" >> src/config.js
+          echo "export const db = {" >> src/config.js
+          echo "  connection: {" >> src/config.js
+          echo "    host: '127.0.0.1'," >> src/config.js
+          echo "    user: 'root'," >> src/config.js
+          echo "    password: 'tempdbpassword'," >> src/config.js
+          echo "    database: 'pizza'," >> src/config.js
+          echo "    connectTimeout: 60000," >> src/config.js
+          echo "  }," >> src/config.js
+          echo "  listPerPage: 10," >> src/config.js
+          echo "};" >> src/config.js
+          echo "" >> src/config.js
+          echo "export const factory = {" >> src/config.js
+          echo "  url: 'https://pizza-factory.cs329.click'," >> src/config.js
+          echo "  apiKey: '${{ secrets.FACTORY_API_KEY }}'," >> src/config.js
+          echo "};" >> src/config.js
+          echo "" >> src/config.js
+          echo "export const metrics = {" >> src/config.js
+          echo "  source: 'jwt-pizza-service'," >> src/config.js
+          echo "  url: '${{ secrets.METRICS_URL }}'," >> src/config.js
+          echo "  apiKey: '${{ secrets.METRICS_API_KEY }}'," >> src/config.js
+          echo "};" >> src/config.js
+          echo "" >> src/config.js
+          echo "export const logging = {" >> src/config.js
+          echo "  source: 'jwt-pizza-service'," >> src/config.js
+          echo "  userId: ${{ secrets.LOGGING_USER_ID }}," >> src/config.js
+          echo "  url: '${{ secrets.LOGGING_URL }}'," >> src/config.js
+          echo "  apiKey: '${{ secrets.LOGGING_API_KEY }}'," >> src/config.js
+          echo "};" >> src/config.js
       # - name: Tests
       #   run: npm test
       - name: set version

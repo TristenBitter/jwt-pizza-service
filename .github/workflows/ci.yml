@@ -35,7 +35,6 @@ jobs:
         run: |
           cat > src/config.js << 'EOF'
           export const jwtSecret = '${{ secrets.JWT_SECRET }}';
-
           export const db = {
             connection: {
               host: '127.0.0.1',
@@ -46,18 +45,15 @@ jobs:
             },
             listPerPage: 10,
           };
-
           export const factory = {
             url: 'https://pizza-factory.cs329.click',
             apiKey: '${{ secrets.FACTORY_API_KEY }}',
           };
-
           export const metrics = {
             source: 'jwt-pizza-service',
             url: '${{ secrets.METRICS_URL }}',
             apiKey: '${{ secrets.METRICS_API_KEY }}',
           };
-
           export const logging = {
             source: 'jwt-pizza-service',
             userId: ${{ secrets.LOGGING_USER_ID }},

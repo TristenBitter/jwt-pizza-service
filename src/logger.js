@@ -45,7 +45,7 @@ class Logger {
 
   log(level, type, logData) {
     const labels = {
-      component: config.logging.source,
+      component: config.source,
       level: level,
       type: type,
     };
@@ -80,12 +80,12 @@ class Logger {
 
   sendLogToGrafana(event) {
     const body = JSON.stringify(event);
-    fetch(config.logging.url, {
+    fetch(config.url, {
       method: 'post',
       body: body,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.logging.userId}:${config.logging.apiKey}`,
+        Authorization: `Bearer ${config.userId}:${config.apiKey}`,
       },
     })
       .then((res) => {

@@ -4,6 +4,7 @@ import { db as _db } from "../config.js";
 import { StatusCodeError } from "../endpointHelper.js";
 import { Role } from "../model/model.js";
 import { tableCreateStatements } from "./dbModel.js";
+import logger from "./logger.js";  // ADD THIS LINE
 
 class DB {
   constructor() {
@@ -508,6 +509,7 @@ class DB {
   }
 
   async query(connection, sql, params) {
+    logger.dbLogger(sql, params);  // ADD THIS LINE
     const [results] = await connection.execute(sql, params);
     return results;
   }
@@ -597,8 +599,5 @@ class DB {
   }
 }
 
-// export const db = new DB();
-// export { Role } from '../model/model.js';
-// export default { Role, DB: db };
 const db = new DB();
 export { db as DB, Role };

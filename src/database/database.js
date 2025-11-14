@@ -4,7 +4,7 @@ import { db as _db } from "../config.js";
 import { StatusCodeError } from "../endpointHelper.js";
 import { Role } from "../model/model.js";
 import { tableCreateStatements } from "./dbModel.js";
-import logger from "./logger.js";  // ADD THIS LINE
+import logger from "../logger.js";  // ADD THIS LINE
 
 class DB {
   constructor() {

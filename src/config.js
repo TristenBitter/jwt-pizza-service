@@ -17,14 +17,14 @@ export const factory = {
 };
 
 export const metrics = {
-  source: 'jwt-pizza-service-dev',
-  url: 'https://otlp-gateway-prod-us-east-2.grafana.net/otlp/v1/metrics',
-  apiKey: '1429590:glc_eyJvIjoiMTU4MjExNyIsIm4iOiJzdGFjay0xNDI5NTkwLWludGVncmF0aW9uLWp3dC1waXp6YS1tZXRyaWNzIiwiayI6Ik0zMHBySTJZOEE2V3VqUDFRQkswMFA3OSIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19',
+  source: "jwt-pizza-service-dev",
+  url: "https://otlp-gateway-prod-us-east-2.grafana.net/otlp/v1/metrics",
+  apiKey: "1429590:glc_eyJvIjoiMTU4MjExNyIsIm4iOiJzdGFjay0xNDI5NTkwLWludGVncmF0aW9uLWp3dC1waXp6YS1tZXRyaWNzIiwiayI6Ik0zMHBySTJZOEE2V3VqUDFRQkswMFA3OSIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19",
 };
 
 export const logging = {
-  source: 'jwt-pizza-service-prod',
+  source: "jwt-pizza-service-prod",
   userId: 0,
-  url: '',
-  apiKey: '',
+  url: "",
+  apiKey: "",
 };

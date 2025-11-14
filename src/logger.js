@@ -1,4 +1,4 @@
-import config from './config.js';
+import { logging as config } from './config.js';
 
 class Logger {
   httpLogger = (req, res, next) => {

@@ -4,6 +4,7 @@ import { Role, DB } from "../database/database.js";
 import { authRouter } from "./authRouter.js";
 import { asyncHandler, StatusCodeError } from "../endpointHelper.js";
 import metrics from "../metrics.js";
+import logger from "../logger.js";  // ADD THIS LINE
 
 export const orderRouter = Router();
 
@@ -122,21 +123,26 @@ orderRouter.post(
     // Calculate total price
     const totalPrice = order.items.reduce((sum, item) => sum + item.price, 0);
 
+    const factoryRequest = {  // ADD THIS
+      diner: { id: req.user.id, name: req.user.name, email: req.user.email },
+      order,
+    };
+
     const r = await fetch(`${factory.url}/api/order`, {
       method: "POST",
       headers: {
         "Content-Type": "application / json",
         authorization: `Bearer ${factory.apiKey}`,
       },
-      body: JSON.stringify({
-        diner: { id: req.user.id, name: req.user.name, email: req.user.email },
-        order,
-      }),
+      body: JSON.stringify(factoryRequest),  // CHANGE THIS
     });
 
     const latency = Date.now() - startTime;
 
     const j = await r.json();
+    
+    logger.factoryLogger(factoryRequest, j);  // ADD THIS LINE
+    
     if (r.ok) {
       metrics.pizzaPurchase(true, latency, totalPrice);
       res.send({ order, followLinkToEndChaos: j.reportUrl, jwt: j.jwt });

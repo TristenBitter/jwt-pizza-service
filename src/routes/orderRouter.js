@@ -4,7 +4,7 @@ import { Role, DB } from "../database/database.js";
 import { authRouter } from "./authRouter.js";
 import { asyncHandler, StatusCodeError } from "../endpointHelper.js";
 import metrics from "../metrics.js";
-import logger from "../logger.js"; // ADD THIS LINE
+import logger from "../logger.js";
 
 export const orderRouter = Router();
 
@@ -78,7 +78,6 @@ orderRouter.docs = [
   },
 ];
 
-// getMenu
 orderRouter.get(
   "/menu",
   asyncHandler(async (req, res) => {
@@ -86,7 +85,6 @@ orderRouter.get(
   })
 );
 
-// addMenuItem
 orderRouter.put(
   "/menu",
   authRouter.authenticateToken,
@@ -101,7 +99,6 @@ orderRouter.put(
   })
 );
 
-// getOrders
 orderRouter.get(
   "/",
   authRouter.authenticateToken,
@@ -110,7 +107,6 @@ orderRouter.get(
   })
 );
 
-// createOrder
 orderRouter.post(
   "/",
   authRouter.authenticateToken,
@@ -120,13 +116,19 @@ orderRouter.post(
     const orderReq = req.body;
     const order = await DB.addDinerOrder(req.user, orderReq);
 
-    // Calculate total price
     const totalPrice = order.items.reduce((sum, item) => sum + item.price, 0);
 
     const factoryRequest = {
-      // ADD THIS
-      diner: { id: req.user.id, name: req.user.name, email: req.user.email },
-      order,
+      diner: {
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email,
+      },
+      order: {
+        franchiseId: Number(order.franchiseId),
+        storeId: Number(order.storeId),
+        items: order.items,
+      },
     };
 
     const r = await fetch(`${factory.url}/api/order`, {
@@ -135,26 +137,13 @@ orderRouter.post(
         "Content-Type": "application/json",
         authorization: `Bearer ${factory.apiKey}`,
       },
-      body: JSON.stringify({
-        diner: { id: req.user.id, name: req.user.name, email: req.user.email },
-        order,
-      }),
+      body: JSON.stringify(factoryRequest),
     });
 
-    // const r = await fetch(`${factory.url}/api/order`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application / json",
-    //     authorization: `Bearer ${factory.apiKey}`,
-    //   },
-    //   body: JSON.stringify(factoryRequest),  // CHANGE THIS
-    // });
-
     const latency = Date.now() - startTime;
-
     const j = await r.json();
 
-    logger.factoryLogger(factoryRequest, j); // ADD THIS LINE
+    logger.factoryLogger(factoryRequest, j);
 
     if (r.ok) {
       metrics.pizzaPurchase(true, latency, totalPrice);
@@ -162,9 +151,7 @@ orderRouter.post(
     } else {
       metrics.pizzaPurchase(false, latency, 0);
       res.status(500).send({
-        message: `Failed to fulfill order at factory, ${(j.message, j.body)}, ${
-          res.authenticateToken
-        } `,
+        message: `Failed to fulfill order at factory: ${j.message}`,
         followLinkToEndChaos: j.reportUrl,
       });
     }

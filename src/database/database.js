@@ -4,7 +4,7 @@ import { sqlDb as _db } from "../config.js";
 import { StatusCodeError } from "../endpointHelper.js";
 import { Role } from "../model/model.js";
 import { tableCreateStatements } from "./dbModel.js";
-import logger from "../logger.js"; // ADD THIS LINE
+import logger from "../logger.js";
 
 class DB {
   constructor() {
@@ -146,7 +146,6 @@ class DB {
       const params = [];
 
       if (name && name !== "*") {
-        // Replace wildcards for LIKE query
         const searchName = name.replace(/\*/g, "%");
         query += " WHERE u.name LIKE ?";
         params.push(searchName);
@@ -157,11 +156,9 @@ class DB {
 
       const users = await this.query(connection, query, params);
 
-      // Check if there are more results
       const more = users.length > limit;
       const resultUsers = users.slice(0, limit);
 
-      // Get roles for each user
       for (const user of resultUsers) {
         const roleResult = await this.query(
           connection,
@@ -509,7 +506,7 @@ class DB {
   }
 
   async query(connection, sql, params) {
-    logger.dbLogger(sql, params); // ADD THIS LINE
+    logger.dbLogger(sql, params);
     const [results] = await connection.execute(sql, params);
     return results;
   }

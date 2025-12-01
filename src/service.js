@@ -7,7 +7,7 @@ import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import metrics from "./metrics.js";
-import logger from "./logger.js";  // ADD THIS LINE
+import logger from "./logger.js"; // ADD THIS LINE
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -15,11 +15,11 @@ const versionJson = JSON.parse(
   readFileSync(join(__dirname, "version.json"), "utf-8")
 );
 const _version = versionJson.version;
-import { factory as _factory, db as _db } from "./config.js";
+import { factory as _factory, sqlDb as _db } from "./config.js";
 
 export const app = express();
 app.use(json());
-app.use(logger.httpLogger);  // ADD THIS LINE (after express.json())
+app.use(logger.httpLogger); // ADD THIS LINE (after express.json())
 app.use(metrics.requestTracker);
 app.use(setAuthUser);
 
@@ -66,7 +66,7 @@ app.use("*", (req, res) => {
 
 // Default error handler for all exceptions and errors.
 app.use((err, req, res, next) => {
-  logger.unhandledErrorLogger(err, req, res, next);  // ADD THIS LINE (before the res.status)
+  logger.unhandledErrorLogger(err, req, res, next); // ADD THIS LINE (before the res.status)
   res
     .status(err.statusCode ?? 500)
     .json({ message: err.message, stack: err.stack });

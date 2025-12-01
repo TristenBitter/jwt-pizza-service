@@ -1,10 +1,10 @@
 import { createConnection } from "mysql2/promise";
 import { hash, compare } from "bcrypt";
-import { db as _db } from "../config.js";
+import { sqlDb as _db } from "../config.js";
 import { StatusCodeError } from "../endpointHelper.js";
 import { Role } from "../model/model.js";
 import { tableCreateStatements } from "./dbModel.js";
-import logger from "../logger.js";  // ADD THIS LINE
+import logger from "../logger.js"; // ADD THIS LINE
 
 class DB {
   constructor() {
@@ -509,7 +509,7 @@ class DB {
   }
 
   async query(connection, sql, params) {
-    logger.dbLogger(sql, params);  // ADD THIS LINE
+    logger.dbLogger(sql, params); // ADD THIS LINE
     const [results] = await connection.execute(sql, params);
     return results;
   }

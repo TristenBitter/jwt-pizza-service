@@ -19,12 +19,8 @@ export const factory = {
 export const metrics = {
   source: "jwt-pizza-service-dev",
   url: "https://otlp-gateway-prod-us-east-2.grafana.net/otlp/v1/metrics",
-<<<<<<< HEAD
-  apiKey: "1429590:glc_eyJvIjoiMTU4MjExNyIsIm4iOiJzdGFjay0xNDI5NTkwLWludGVncmF0aW9uLWp3dC1waXp6YS1tZXRyaWNzIiwiayI6Ik0zMHBySTJZOEE2V3VqUDFRQkswMFA3OSIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19",
-=======
   apiKey:
     "1429590:glc_eyJvIjoiMTU4MjExNyIsIm4iOiJzdGFjay0xNDI5NTkwLWludGVncmF0aW9uLWp3dC1waXp6YS1tZXRyaWNzIiwiayI6Ik0zMHBySTJZOEE2V3VqUDFRQkswMFA3OSIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19",
->>>>>>> e5f230a (changed syntax error)
 };
 
 export const logging = {

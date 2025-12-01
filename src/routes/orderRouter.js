@@ -123,10 +123,11 @@ orderRouter.post(
     // Calculate total price
     const totalPrice = order.items.reduce((sum, item) => sum + item.price, 0);
 
-    // const factoryRequest = {  // ADD THIS
-    //   diner: { id: req.user.id, name: req.user.name, email: req.user.email },
-    //   order,
-    // };
+    const factoryRequest = {
+      // ADD THIS
+      diner: { id: req.user.id, name: req.user.name, email: req.user.email },
+      order,
+    };
 
     const r = await fetch(`${factory.url}/api/order`, {
       method: "POST",

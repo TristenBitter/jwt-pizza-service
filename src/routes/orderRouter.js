@@ -162,7 +162,9 @@ orderRouter.post(
     } else {
       metrics.pizzaPurchase(false, latency, 0);
       res.status(500).send({
-        message: `Failed to fulfill order at factory, ${res.message}, ${res.authenticateToken} `,
+        message: `Failed to fulfill order at factory, ${(j.message, j.body)}, ${
+          res.authenticateToken
+        } `,
         followLinkToEndChaos: j.reportUrl,
       });
     }

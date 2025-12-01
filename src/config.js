@@ -4,7 +4,7 @@ export const sqlDb = {
   connection: {
     host: "127.0.0.1",
     user: "root",
-    password: "Dolphin329",
+    password: "NewPassword123!",
     database: "jwtpizza",
     connectTimeout: 60000,
   },

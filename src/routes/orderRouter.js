@@ -114,7 +114,22 @@ orderRouter.post(
     const startTime = Date.now();
 
     const orderReq = req.body;
+    console.log("1. Incoming request body:", JSON.stringify(orderReq));
+
     const order = await DB.addDinerOrder(req.user, orderReq);
+    console.log("2. Order from DB:", JSON.stringify(order));
+    console.log(
+      "2a. storeId type:",
+      typeof order.storeId,
+      "value:",
+      order.storeId
+    );
+    console.log(
+      "2b. franchiseId type:",
+      typeof order.franchiseId,
+      "value:",
+      order.franchiseId
+    );
 
     const totalPrice = order.items.reduce((sum, item) => sum + item.price, 0);
 
@@ -131,17 +146,40 @@ orderRouter.post(
       },
     };
 
+    console.log(
+      "3. Factory request being sent:",
+      JSON.stringify(factoryRequest)
+    );
+    console.log(
+      "3a. Converted storeId type:",
+      typeof factoryRequest.order.storeId,
+      "value:",
+      factoryRequest.order.storeId
+    );
+    console.log(
+      "3b. Converted franchiseId type:",
+      typeof factoryRequest.order.franchiseId,
+      "value:",
+      factoryRequest.order.franchiseId
+    );
+
+    const requestBody = JSON.stringify(factoryRequest);
+    console.log("4. Stringified body:", requestBody);
+
     const r = await fetch(`${factory.url}/api/order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${factory.apiKey}`,
       },
-      body: JSON.stringify(factoryRequest),
+      body: requestBody,
     });
 
     const latency = Date.now() - startTime;
     const j = await r.json();
+
+    console.log("5. Factory response:", JSON.stringify(j));
+    console.log("6. Factory response status:", r.status, r.ok);
 
     logger.factoryLogger(factoryRequest, j);
 
@@ -150,6 +188,7 @@ orderRouter.post(
       res.send({ order, followLinkToEndChaos: j.reportUrl, jwt: j.jwt });
     } else {
       metrics.pizzaPurchase(false, latency, 0);
+      console.log("7. ERROR - Factory rejected the request");
       res.status(500).send({
         message: `Failed to fulfill order at factory: ${j.message}`,
         followLinkToEndChaos: j.reportUrl,

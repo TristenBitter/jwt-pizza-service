@@ -317,14 +317,13 @@ class DB {
   //     connection.end();
   //   }
   // }
-
   async addDinerOrder(user, order) {
     const connection = await this.getConnection();
     try {
       const orderResult = await this.query(
         connection,
         `INSERT INTO dinerOrder (dinerId, franchiseId, storeId, date) VALUES (?, ?, ?, now())`,
-        [user.id, Number(order.franchiseId), Number(order.storeId)] // Convert to numbers HERE
+        [user.id, Number(order.franchiseId), Number(order.storeId)] // ← Convert to numbers HERE
       );
       const orderId = orderResult.insertId;
       for (const item of order.items) {
@@ -335,10 +334,11 @@ class DB {
           [orderId, menuId, item.description, item.price]
         );
       }
+
       return {
-        ...order,
         franchiseId: Number(order.franchiseId),
         storeId: Number(order.storeId),
+        items: order.items,
         id: orderId,
       };
     } finally {

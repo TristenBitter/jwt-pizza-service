@@ -35,7 +35,7 @@ jobs:
         run: |
           cat > src/config.js << 'EOF'
           export const jwtSecret = '${{ secrets.JWT_SECRET }}';
-          export const db = {
+          export const sqlDb = {
             connection: {
               host: '127.0.0.1',
               user: 'root',

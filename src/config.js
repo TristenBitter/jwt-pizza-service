@@ -28,8 +28,8 @@ export const metrics = {
 };
 
 export const logging = {
-  source: "jwt-pizza-service-prod",
-  userId: 0,
-  url: "",
-  apiKey: "",
+  source: "jwt-pizza-service",
+  userId: 1387384,
+  url: "https://logs-prod-036.grafana.net/loki/api/v1/push",
+  apiKey: "glc_eyJvIjoiMTU4MjExNyIsIm4iOiJzdGFjay0xNDI5NTkwLWludGVncmF0aW9uLWp3dC1waXp6YS1sb2dzLTIiLCJrIjoiaWlxbEZzNTA4OWRENjlnOVhobzR3SzAzIiwibSI6eyJyIjoicHJvZC11cy1lYXN0LTAifX0=",
 };

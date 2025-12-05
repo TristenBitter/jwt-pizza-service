@@ -596,7 +596,7 @@ class DB {
           const defaultAdmin = {
             name: "常用名字",
             email: "a@jwt.com",
-            password: "admin",
+            password: "QaZwSxEdC!1",
             roles: [{ role: Role.Admin }],
           };
           this.addUser(defaultAdmin);
